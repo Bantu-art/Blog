@@ -15,5 +15,7 @@
     {% empty %}
         <p>No posts yet!</p>
     {% endfor %}
+
+    <a href="{% url 'create_blog_post' %}">Create a new blog post</a>
 </body>
 </html>
