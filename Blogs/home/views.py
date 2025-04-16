@@ -22,4 +22,4 @@ def create_blog_post(request):
     else:
         form = BlogPostForm()
     
-    return render(request, 'blog/create_blog_post.html', {'form': form})
+    return render(request, 'home/create_blog_post.html', {'form': form})
