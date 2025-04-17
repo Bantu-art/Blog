@@ -1,4 +1,5 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
+from django.http import JsonResponse
 from .models import BlogPost
 from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
@@ -23,3 +24,14 @@ def create_blog_post(request):
         form = BlogPostForm()
     
     return render(request, 'home/create_blog_post.html', {'form': form})
+
+@login_required
+def like_post(request, post_id):
+    post = get_object_or_404(BlogPost, id=post_id)
+    if request.user in post.likes.all():
+        post.likes.remove(request.user)  # Unlike if already liked
+        liked = False
+    else:
+        post.likes.add(request.user)  # Like the post
+        liked = True
+    return JsonResponse({'liked': liked, 'total_likes': post.total_likes()})
