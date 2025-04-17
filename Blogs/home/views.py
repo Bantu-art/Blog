@@ -1,9 +1,7 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
-from .models import BlogPost
-from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
-from .models import BlogPost
+from .models import BlogPost, Comment
 from .forms import BlogPostForm  # We'll create this form next
 
 def home(request):
@@ -35,3 +33,19 @@ def like_post(request, post_id):
         post.likes.add(request.user)  # Like the post
         liked = True
     return JsonResponse({'liked': liked, 'total_likes': post.total_likes()})
+
+@login_required
+def add_comment(request, post_id):
+    if request.method == 'POST':
+        post = get_object_or_404(BlogPost, id=post_id)
+        content = request.POST.get('content')
+        parent_id = request.POST.get('parent_id')
+        parent = Comment.objects.get(id=parent_id) if parent_id else None
+        comment = Comment.objects.create(post=post, user=request.user, content=content, parent=parent)
+        return JsonResponse({
+            'id': comment.id,
+            'content': comment.content,
+            'user': comment.user.username,
+            'created_at': comment.created_at.strftime('%Y-%m-%d %H:%M:%S'),
+            'parent_id': parent_id
+        })
