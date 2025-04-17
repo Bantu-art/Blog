@@ -2,6 +2,7 @@
 <html>
 <head>
     <title>My Blog</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
     <h1>All Blog Posts</h1>
@@ -10,6 +11,16 @@
             <h2>{{ post.title }}</h2>
             <p>{{ post.content|truncatewords:30 }}</p>
             <p><i>By {{ post.author.username }} on {{ post.created_at }}</i></p>
+            <p>
+                <button class="like-btn" data-post-id="{{ post.id }}">
+                    {% if user in post.likes.all %}
+                        Unlike
+                    {% else %}
+                        Like
+                    {% endif %}
+                </button>
+                <span id="like-count-{{ post.id }}">{{ post.total_likes }}</span> likes
+            </p>
         </div>
         <hr>
     {% empty %}
@@ -17,5 +28,21 @@
     {% endfor %}
 
     <a href="{% url 'create_blog_post' %}">Create a new blog post</a>
+
+    <script>
+        $(document).on('click', '.like-btn', function() {
+            const postId = $(this).data('post-id');
+            const likeBtn = $(this);
+            $.ajax({
+                url: `{% url 'like_post' 0 %}`.replace('0', postId),
+                method: 'POST',
+                headers: { 'X-CSRFToken': '{{ csrf_token }}' },
+                success: function(data) {
+                    likeBtn.text(data.liked ? 'Unlike' : 'Like');
+                    $(`#like-count-${postId}`).text(data.total_likes);
+                }
+            });
+        });
+    </script>
 </body>
 </html>
