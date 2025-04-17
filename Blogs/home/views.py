@@ -2,15 +2,33 @@ from django.shortcuts import render, get_object_or_404, redirect
 from django.http import JsonResponse
 from django.contrib.auth.decorators import login_required
 from .models import BlogPost, Comment
-from .forms import BlogPostForm  # We'll create this form next
+from .forms import BlogPostForm 
 
 def home(request):
+     """
+    Renders the home page with a list of all blog posts.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        HttpResponse: The rendered home page template with blog posts.
+    """
     posts = BlogPost.objects.all().order_by('-created_at')  # latest first
     return render(request, 'home/home.html', {'posts': posts})
 
 # Create Blog Post View
 @login_required
 def create_blog_post(request):
+     """
+    Handles the creation of a new blog post.
+
+    Args:
+        request: The HTTP request object.
+
+    Returns:
+        HttpResponse: Redirects to the home page after successful creation.
+    """
     if request.method == 'POST':
         form = BlogPostForm(request.POST)
         if form.is_valid():
@@ -25,6 +43,16 @@ def create_blog_post(request):
 
 @login_required
 def like_post(request, post_id):
+     """
+    Handles liking or unliking a blog post.
+
+    Args:
+        request: The HTTP request object.
+        post_id (int): The ID of the blog post to like or unlike.
+
+    Returns:
+        JsonResponse: A JSON response with the updated like status and total likes.
+    """
     post = get_object_or_404(BlogPost, id=post_id)
     if request.user in post.likes.all():
         post.likes.remove(request.user)  # Unlike if already liked
@@ -36,6 +64,16 @@ def like_post(request, post_id):
 
 @login_required
 def add_comment(request, post_id):
+     """
+    Handles adding a comment or reply to a blog post.
+
+    Args:
+        request: The HTTP request object.
+        post_id (int): The ID of the blog post to comment on.
+
+    Returns:
+        JsonResponse: A JSON response with the created comment details.
+    """
     if request.method == 'POST':
         post = get_object_or_404(BlogPost, id=post_id)
         content = request.POST.get('content')
