@@ -5,7 +5,7 @@ from .models import BlogPost, Comment
 from .forms import BlogPostForm 
 
 def home(request):
-     """
+    """
     Renders the home page with a list of all blog posts.
 
     Args:
@@ -20,7 +20,7 @@ def home(request):
 # Create Blog Post View
 @login_required
 def create_blog_post(request):
-     """
+    """
     Handles the creation of a new blog post.
 
     Args:
@@ -43,7 +43,7 @@ def create_blog_post(request):
 
 @login_required
 def like_post(request, post_id):
-     """
+    """
     Handles liking or unliking a blog post.
 
     Args:
@@ -64,7 +64,7 @@ def like_post(request, post_id):
 
 @login_required
 def add_comment(request, post_id):
-     """
+    """
     Handles adding a comment or reply to a blog post.
 
     Args:

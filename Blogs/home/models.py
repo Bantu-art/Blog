@@ -2,7 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 
 class BlogPost(models.Model):
-      """
+    """
     Represents a blog post created by a user.
 
     Attributes:
@@ -24,13 +24,13 @@ class BlogPost(models.Model):
         return self.title
 
     def total_likes(self):
-         """
+        """
         Returns the total number of likes for the blog post.
         """
         return self.likes.count()
 
 class Comment(models.Model):
-     """
+    """
     Represents a comment on a blog post.
 
     Attributes:
