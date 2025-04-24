@@ -26,9 +26,7 @@ A dynamic blogging platform built with Django where users can share their storie
 ### Upcoming Features
 - 🔐 User registration with email verification
 - 📝 Markdown support & rich text editor
-- 💬 Nested comment system
 - 📁 Categories and tags
-- ❤️ Like/bookmark system
 - 🔍 Advanced search functionality
 - 📱 Progressive Web App (PWA) support
 
@@ -37,7 +35,6 @@ A dynamic blogging platform built with Django where users can share their storie
 ### Backend
 - Python 3.8+
 - Django 4.x
-- PostgreSQL
 - Django REST Framework
 - Django Crispy Forms
 - Pillow (for image handling)
