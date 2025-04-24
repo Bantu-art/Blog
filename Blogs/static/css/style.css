@@ -1,0 +1,147 @@
+/* General Reset */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+    color: #333;
+}
+
+/* Header */
+h1 {
+    text-align: center;
+    margin: 20px 0;
+    color: #444;
+}
+
+/* Blog Post Container */
+div {
+    max-width: 800px;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+/* Blog Title */
+h2 {
+    color: #222;
+    margin-bottom: 10px;
+}
+
+/* Blog Content */
+p {
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+/* Like Button */
+.like-btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.like-btn:hover {
+    background-color: #0056b3;
+}
+
+/* Like Count */
+#like-count {
+    font-weight: bold;
+    margin-left: 10px;
+}
+
+/* Comments Section */
+h3 {
+    margin-top: 20px;
+    color: #555;
+}
+
+#comments {
+    margin-top: 10px;
+}
+
+#comments div {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+/* Comment Form */
+.comment-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    resize: none;
+}
+
+.comment-form button {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.comment-form button:hover {
+    background-color: #218838;
+}
+
+/* Reply Button */
+.reply-btn {
+    background-color: #ffc107;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.reply-btn:hover {
+    background-color: #e0a800;
+}
+
+/* Footer Link */
+a {
+    display: block;
+    text-align: center;
+    margin: 20px 0;
+    color: #007bff;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    div {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    .like-btn, .comment-form button, .reply-btn {
+        font-size: 14px;
+        padding: 6px 10px;
+    }
+}
